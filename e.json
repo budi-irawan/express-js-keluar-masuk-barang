@@ -1,0 +1,49 @@
+"/inventory/api/barang-keluar": {
+  "get": {
+    "tags": [
+      "Barang Keluar"
+    ],
+    "summary": "Get all barang keluar data",
+    "responses": {
+      "200": {
+        "description": "Success"
+      }
+    }
+  }
+},
+"/inventory/api/barang-keluar/create": {
+  "post": {
+    "tags": [
+      "Barang Keluar"
+    ],
+    "summary": "barang keluar customer data",
+    "security": [{
+      "MyUserToken": []
+    }],
+    "requestBody": {
+      "required": "true",
+      "content": {
+        "application/x-www-form-urlencoded": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "nama_barang": {
+                "type": "string",
+                "required": "true"
+              },
+              "jumlah": {
+                "type": "integer",
+                "required": "true"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Success"
+      }
+    }
+  }
+},

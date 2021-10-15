@@ -1,0 +1,722 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Keluar Masuk Barang",
+    "version": "1.0.0",
+    "description": "https://github.com/budi-irawan/express-js-keluar-masuk-barang"
+  },
+  "servers": [{
+    "url": "https://keluar-masuk-barang.herokuapp.com"
+  }],
+  "tags": [{
+      "name": "Customer"
+    },
+    {
+      "name": "Barang Masuk"
+    },
+    {
+      "name": "User"
+    },
+    {
+      "name": "Barang"
+    }
+  ],
+  "paths": {
+    "/inventory/api/customers/register": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "registration customer data",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "alamat": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "email": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "password": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/customers/login": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "login customer data",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "password": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/customers/aktivasi/{confirmation_code}": {
+      "put": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "aktivasi customer data",
+        "parameters": [{
+          "in": "path",
+          "name": "confirmation_code",
+          "schema": {
+            "type": "string"
+          },
+          "description": "confirmation_code"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/customers/lupa-password": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "forget password customer data",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/customers/ubah-password/{token}": {
+      "put": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "ubah password customer data",
+        "parameters": [{
+          "in": "path",
+          "name": "token",
+          "schema": {
+            "type": "string"
+          },
+          "description": "token reset password"
+        }],
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/customers": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "customers data",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/customers/{id}/profile": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "customers detail data",
+        "security": [{
+          "MyUserToken": []
+        }],
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "integer"
+          },
+          "description": "customer id"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/customers/{id}/riwayat-transaksi": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "customers history transaksi data",
+        "security": [{
+          "MyUserToken": []
+        }],
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "integer"
+          },
+          "description": "customer id"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/customers/{id}": {
+      "delete": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "customers delete data",
+        "security": [{
+          "MyUserToken": []
+        }],
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "integer"
+          },
+          "description": "user id"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/barang-masuk": {
+      "get": {
+        "tags": [
+          "Barang Masuk"
+        ],
+        "summary": "Get all barang masuk data",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/barang-masuk/create": {
+      "post": {
+        "tags": [
+          "Barang Masuk"
+        ],
+        "summary": "barang masuk customer data",
+        "security": [{
+          "MyUserToken": []
+        }],
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama_barang": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "jumlah": {
+                    "type": "integer",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/users/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "registration user data",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "email": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "password": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "nama_role": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/users/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "login user data",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "password": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/users": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "users data",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/users/{id}/profile": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "users detail data",
+        "security": [{
+          "MyUserToken": []
+        }],
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "integer"
+          },
+          "description": "user id"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/users/lupa-password": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "forget password user data",
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/users/ubah-password/{token}": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "ubah password user data",
+        "parameters": [{
+          "in": "path",
+          "name": "token",
+          "schema": {
+            "type": "string"
+          },
+          "description": "token reset password"
+        }],
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/users/{id}/riwayat-input": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "users history transaksi data",
+        "security": [{
+          "MyUserToken": []
+        }],
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "integer"
+          },
+          "description": "user id"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/users/{id}": {
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "users delete data",
+        "security": [{
+          "MyUserToken": []
+        }],
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "integer"
+          },
+          "description": "user id"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/barang/create": {
+      "post": {
+        "tags": [
+          "Barang"
+        ],
+        "summary": "create barang data",
+        "security": [{
+          "MyUserToken": []
+        }],
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama_barang": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "harga_beli": {
+                    "type": "integer",
+                    "required": "true"
+                  },
+                  "harga_jual": {
+                    "type": "integer",
+                    "required": "true"
+                  },
+                  "stok": {
+                    "type": "integer",
+                    "required": "true"
+                  },
+                  "satuan": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "nama_pemasok": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "gambar": {
+                    "type": "string",
+                    "required": "true",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/barang": {
+      "get": {
+        "tags": [
+          "Barang"
+        ],
+        "summary": "barang data",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/barang/{id}/details": {
+      "put": {
+        "tags": [
+          "Barang"
+        ],
+        "summary": "update barang data",
+        "security": [{
+          "MyUserToken": []
+        }],
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "integer"
+          },
+          "description": "barang id"
+        }],
+        "consumes": "multipart/form-data",
+        "requestBody": {
+          "required": "true",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama_barang": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "harga_beli": {
+                    "type": "integer",
+                    "required": "true"
+                  },
+                  "harga_jual": {
+                    "type": "integer",
+                    "required": "true"
+                  },
+                  "stok": {
+                    "type": "integer",
+                    "required": "true"
+                  },
+                  "satuan": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "nama_pemasok": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "gambar": {
+                    "type": "string",
+                    "required": "true",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/inventory/api/barang/{id}": {
+      "delete": {
+        "tags": [
+          "Barang"
+        ],
+        "summary": "barang delete data",
+        "security": [{
+          "MyUserToken": []
+        }],
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "integer"
+          },
+          "description": "barang id"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "MyUserToken": {
+        "name": "token",
+        "type": "apiKey",
+        "in": "header"
+      }
+    }
+  }
+}
